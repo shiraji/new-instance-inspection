@@ -6,6 +6,8 @@ This plugin add an inspection that check if Fragment implements following method
 public static MyFramgment newInstance()
 ```
 
+![screenshot](website/images/new_instance_inspection_screenshot.gif)
+
 This inspection is enabled by default. To change settings, go to `Preferences > Editor > Inspections > Android > Fragment should implement newInstance()`
 
 ## Installation
