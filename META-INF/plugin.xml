@@ -1,0 +1,57 @@
+<idea-plugin version="2">
+    <id>com.github.shiraji.newinstanceinspection</id>
+    <name>Fragment newInstance Inspection</name>
+    <version>0.0.1</version>
+    <vendor email="isogai.shiraji@gmail.com" url="https://github.com/shiraji">Shiraji</vendor>
+
+    <description><![CDATA[
+        This plugin add a custom inspection that checks Fragment implements newInstance method.
+        newInstance method should be followings:
+        <ul>
+            <li>modifiers are public static</li>
+            <li>method name is newInstance</li>
+            <li>return type is its Fragment class name</li>
+        </ul>
+
+        If the class is abstract, it won't warn to implement newInstance method.
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <p>0.0.1</p>
+        <ul>
+            <li>Initial release</li>
+        </ul>
+    ]]>
+    </change-notes>
+
+    <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+    <idea-version since-build="131"/>
+
+    <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <localInspection enabledByDefault="true"
+                         groupBundle="messages.InspectionsBundle"
+                         groupPath="Android"
+                         implementationClass="com.github.shiraji.newinstanceinspection.inspection.NewInstanceInspection"
+                         language="JAVA" level="WARNING"/>
+    </extensions>
+
+    <application-components>
+        <!-- Add your application components here -->
+    </application-components>
+
+    <project-components>
+        <!-- Add your project components here -->
+    </project-components>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>

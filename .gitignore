@@ -1,0 +1,7 @@
+.idea/*
+!.idea/codeStyleSettings.xml
+!.idea/inspectionProfiles
+!.idea/runConfigurations
+!.idea/vcs.xml
+!.idea/modules.xml
+out/
