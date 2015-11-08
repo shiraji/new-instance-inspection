@@ -1,0 +1,29 @@
+plugins {
+    id "org.jetbrains.intellij" version "0.0.25"
+}
+
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+intellij {
+    version '14.1.4'
+    plugins 'coverage'
+    pluginName 'create-intent-inspection'
+}
+
+group 'create-intent-inspection'
+version '1.0.0'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.5'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
