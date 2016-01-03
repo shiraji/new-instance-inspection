@@ -8,6 +8,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
+import com.intellij.psi.impl.source.PsiClassImpl;
 import com.siyeh.ig.BaseInspectionVisitor;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,6 +28,10 @@ public class NewInstanceInspectionVisitor extends BaseInspectionVisitor {
     @Override
     public void visitClass(PsiClass aClass) {
         if (InspectionPsiUtil.isAbstactClass(aClass)) {
+            return;
+        }
+
+        if (!(aClass instanceof PsiClassImpl)) {
             return;
         }
 
