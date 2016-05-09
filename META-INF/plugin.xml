@@ -1,22 +1,20 @@
 <idea-plugin version="2">
     <id>com.github.shiraji.newinstanceinspection</id>
     <name>Fragment newInstance Inspection</name>
-    <version>0.0.2</version>
+    <version>0.1.0</version>
     <vendor email="isogai.shiraji@gmail.com" url="https://github.com/shiraji">Shiraji</vendor>
 
     <description><![CDATA[
-        This plugin add a custom inspection that checks Fragment implements newInstance method.
-        newInstance method should be followings:
-        <ul>
-            <li>modifiers are public static</li>
-            <li>method name is newInstance</li>
-            <li>return type is its Fragment class name</li>
-        </ul>
-
+        This plugin add a custom inspection that checks Fragment implements a static method of creating its instance.
         If the class is abstract, it won't warn to implement newInstance method.
     ]]></description>
 
     <change-notes><![CDATA[
+        <p>0.1.0</p>
+        <ul>
+            <li>Add a config for the method name (#6)</li>
+        </ul>
+
         <p>0.0.2</p>
         <ul>
             <li>Fix a problem with generic type parameter</li>
