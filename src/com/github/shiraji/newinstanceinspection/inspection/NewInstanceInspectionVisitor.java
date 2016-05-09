@@ -15,14 +15,13 @@ import org.jetbrains.annotations.NotNull;
 public class NewInstanceInspectionVisitor extends BaseInspectionVisitor {
     public static final String QUALIFIED_NAME_OF_SUPER_CLASS = "android.app.Fragment";
     public static final String QUALIFIED_NAME_OF_SUPER_CLASS_FOR_SUPPORT_LIBRARY = "android.support.v4.app.Fragment";
-    public static final String STATIC_METHOD_NAME = "newInstance";
 
     private ProblemsHolder mHolder;
-    private boolean mIsOnTheFly;
+    private String methodName;
 
-    public NewInstanceInspectionVisitor(ProblemsHolder holder, boolean isOnTheFly) {
+    public NewInstanceInspectionVisitor(ProblemsHolder holder, String name) {
         mHolder = holder;
-        mIsOnTheFly = isOnTheFly;
+        methodName = name;
     }
 
     @Override
@@ -58,11 +57,12 @@ public class NewInstanceInspectionVisitor extends BaseInspectionVisitor {
     }
 
     private boolean isMethodNameNewInstance(PsiMethod method) {
-        return STATIC_METHOD_NAME.equals(method.getName());
+        return methodName.equals(method.getName());
     }
 
     private boolean isReturnFragment(PsiClass aClass, PsiMethod method) {
         return method.getReturnTypeElement() != null &&
+                aClass.getName() != null &&
                 aClass.getName().equals(method.getReturnTypeElement().getText());
     }
 
@@ -72,7 +72,8 @@ public class NewInstanceInspectionVisitor extends BaseInspectionVisitor {
             return true;
         }
 
-        PsiClass supportLibFragmentClass = InspectionPsiUtil.createPsiClass(QUALIFIED_NAME_OF_SUPER_CLASS_FOR_SUPPORT_LIBRARY, aClass.getProject());
+        PsiClass supportLibFragmentClass = InspectionPsiUtil.createPsiClass(QUALIFIED_NAME_OF_SUPER_CLASS_FOR_SUPPORT_LIBRARY,
+                aClass.getProject());
         return supportLibFragmentClass != null && aClass.isInheritor(supportLibFragmentClass, true);
     }
 
@@ -82,19 +83,21 @@ public class NewInstanceInspectionVisitor extends BaseInspectionVisitor {
             nameIdentifier = aClass;
         }
 
-        mHolder.registerProblem(nameIdentifier, getAlertMessage(aClass),
-                ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
-                TextRange.allOf(aClass.getName()), new AddMethodFix(getMethodText(aClass), aClass));
+        if (aClass.getName() != null) {
+            mHolder.registerProblem(nameIdentifier, getAlertMessage(aClass),
+                    ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
+                    TextRange.allOf(aClass.getName()), new AddMethodFix(getMethodText(aClass), aClass));
+        }
     }
 
     @NotNull
     private String getAlertMessage(PsiClass aClass) {
-        return "Implement public static " + aClass.getName() + " newInstance()";
+        return "Implement public static " + aClass.getName() + " " + methodName + "()";
     }
 
     @NotNull
     private String getMethodText(PsiClass aClass) {
         String className = aClass.getName();
-        return "public static " + className + " newInstance() { " + className + " fragment = new " + className + "();return fragment; }";
+        return "public static " + className + " " + methodName + "() { " + className + " fragment = new " + className + "();return fragment; }";
     }
 }
