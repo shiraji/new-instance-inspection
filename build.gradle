@@ -1,24 +1,29 @@
 plugins {
-    id "org.jetbrains.intellij" version "0.0.25"
+    id "org.jetbrains.intellij" version "0.1.9"
 }
 
 apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
 
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
 
 intellij {
-    version '14.1.4'
-    plugins 'coverage'
-    pluginName 'create-intent-inspection'
+    version '141.713.2'
+    pluginName 'new-instance-inspection'
+    alternativeIdePath '/Applications/Android Studio.app'
+
+    updateSinceUntilBuild = false
+    sameSinceUntilBuild = false
+    publish {
+        username 'shiraji'
+        password System.getenv('PASSWORD')
+        pluginId '7916'
+    }
 }
 
 group 'create-intent-inspection'
-version '1.0.0'
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.5'
-}
+version '0.1.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
