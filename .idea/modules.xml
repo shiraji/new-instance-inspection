@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/new-instance-inspection.iml" filepath="$PROJECT_DIR$/new-instance-inspection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/new-instance-inspection.iml" filepath="$PROJECT_DIR$/.idea/modules/new-instance-inspection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/new-instance-inspection_main.iml" filepath="$PROJECT_DIR$/.idea/modules/new-instance-inspection_main.iml" group="new-instance-inspection" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/new-instance-inspection_test.iml" filepath="$PROJECT_DIR$/.idea/modules/new-instance-inspection_test.iml" group="new-instance-inspection" />
     </modules>
   </component>
 </project>
